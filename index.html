@@ -15,7 +15,8 @@
 			}
 
 			.section{
-		  	padding-bottom: 0;			
+		  	padding: 0;		
+				margin: 0;	
 			}
 			
 			.fa {
@@ -51,40 +52,49 @@
 				align-items: right;
 			}
 			#body-information{
-				margin-left: 6em;
-				margin-right: 6em;
-				/* padding-top: 0; */
+				margin-left: 10em;
+				margin-right: 10em;
+				padding-top: 5em;
 				/* padding-bottom: 0; */
+			}
+			#body-information-gray-bottom{
+				padding-bottom: 5em;
 			}
 			#body-contact-information{
 				padding-bottom: 3em;
+			}
+			#resume, #portafolio, #gallery {
+				padding-left: 3em;
+			}
+			#banner-title, #banner-options{
+				padding-right: 2em;
+				padding-left: 2em;
+			}
+			#gray-section{
+				background-color: #dddddd;
 			}
 
 		</style>
 
 	</head>
 	<body>
-	    <section class="section">
-	    	<div class="container is-fluid">
-	            <div class="hero is-parent is-info is-warning">
-	                <div class="hero-body is-child">
-	                	<div class="level is-parent is-warning">
-	                		<div class="level-left is-child">
-	                			<h1 class="title">Tawa Reyna Villarreal</h1>
-			                </div>
-				            <div class="level-right is-child">
-			                	<h1 class="subtitle">4757 Snyder Ln, Rohnert Park, CA <br>  831-524-6984  <br> tawareyna@gmail.com </h1>
-			                </div> 
-			            </div>
-	                </div>
-	            </div>
-       		</div>
-	    </section>
+			<div class="hero is-warning">
+						<div id="banner-title" class="level is-parent is-warning">
+							<div class="level-left is-child">
+									<h1 class="title">Tawa Reyna Villarreal</h1>
+							</div>
+							<div id="banner-options" class="level-right is-child">
+									<!-- <h1 class="subtitle">4757 Snyder Ln, Rohnert Park, CA <br>  831-524-6984  <br> tawareyna@gmail.com </h1> -->
+									<i id="resume"> Resume</i>
+									<i id="portafolio"> Portafolio</i>
+									<i id="gallery"> Gallery</i>
+							</div> 
+						</div>
+			</div>
 
-	    <section class="section" id="body-information">
+	    <section class="section">
 	        <div class="container is-fluid">
-	        	
-	          <div class="columns">
+	          <div class="columns " id="body-information">
        				<div class= "column is-two-thirds">	
        					<p class="title">PROFILE</p>
        					<br>	             
@@ -111,6 +121,7 @@
 						
 								</div>
 						</div>
+					</div>
 						<!-- 
 	            <h1 class="title">CLASSES</h1>
  						<br>
@@ -186,95 +197,106 @@
 		              
 		                <br>
 		                <br> -->
+					<div id="gray-section" class="container is-fluid">
+						<div id="body-information">
+							<h1 class="title">EMPLOYMENT HISTORY</h1>
+							<br>
+							<h1 class="subtitle">College Kickstart ...................................................................................................................................................................................................................... 2021 - current </h1>
 
-						<h1 class="title">EMPLOYMENT HISTORY</h1>
-						<br>
-						<h1 class="subtitle">College Kickstart ...................................................................................................................................................................................................................... 2021 - current </h1>
+							<ul type="circle">
+								<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
+								<br>
+								<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
+								<br>
+								<li> • Implemented agile methodologies and organization to maximize product development.</li>
+								<br>
+							</ul>
+							<br>
+							<h1 class="subtitle">ThinQ.tv ....................................................................................................................................................................................................................................... 2020 </h1>
 
- 						<ul type="circle">
-						  <li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
-						  <br>
-						  <li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
-						  <br>
-						  <li> • Implemented agile methodologies and organization to maximize product development.</li>
-						  <br>
-						</ul>
-						<br>
-	      		<h1 class="subtitle">ThinQ.tv ....................................................................................................................................................................................................................................... 2020 </h1>
+							<ul type="circle">
+								<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
+								<br>
+								<li> • Collaborated with project managers to set milestones on
+									pre-release software project development.</li>
+								<br>
+								<li> • Implemented agile methodologies and effective
+									development practices to enhance product development.</li>
+								<br>
+							</ul>
+							<br>
+							<h1 class="subtitle">Veg on the Edge ...................................................................................................................................................................................................................... 2019-2020 </h1>
 
- 						<ul type="circle">
-						  <li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
-						  <br>
-						  <li> • Collaborated with project managers to set milestones on
-								pre-release software project development.</li>
-						  <br>
-						  <li> • Implemented agile methodologies and effective
-								development practices to enhance product development.</li>
-						  <br>
-						</ul>
-						<br>
-						<h1 class="subtitle">Veg on the Edge ...................................................................................................................................................................................................................... 2019-2020 </h1>
-
- 						<ul type="circle">
-						  <li> • Cook, platter, dishwasher and worked register.</li>
-						  <br>
-						  <li> • Dealt with 500+ customers a day.</li>
-						  <br>
-						  <li> • Maintained well-stocked stations with supplies and
-								spices for maximum productivity.</li>
-						  <br>
-						</ul>
-						<br>
-						<h1 class="title">SKILLS/AWARDS</h1>
-						<br>
-		        <div class="columns">
-       				<div class= "column is-three-quarters">	
-									<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, ruby on rails, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
-										Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
-										Experience with the use of data structures, recursive functions and Database Systems. 
-										Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
-										Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
-									</h1> 
-									<br>
-							</div>
-							<div class= "column">	
-								<ul type="circle">
-									<li> • Bilingual</li>
-									<br>
-									<li> • Analytical Thinker</li>
-									<br>
-									<li> • Time Management</li>
-									<br>
-									<li> • Detail Oriented</li>
-								</ul>
-				   		</div>
+							<ul type="circle">
+								<li> • Cook, platter, dishwasher and worked register.</li>
+								<br>
+								<li> • Dealt with 500+ customers a day.</li>
+								<br>
+								<li> • Maintained well-stocked stations with supplies and
+									spices for maximum productivity.</li>
+								<br>
+							</ul>
+							<br>
 						</div>
-						<h1 class="title">PROJECTS</h1>
+					</div>
+					<div class="container is-fluid">
+						<div id="body-information">
+							<h1 class="title">SKILLS/AWARDS</h1>
 							<br>
-							<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
-								that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
-							<br>
-							<br>
-							<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS">
-										UCSC Eats repository</a> 
-								</h1>
-								<br>
-								<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
-									You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
-									The goal is to make as many hunters explode as you can and get the highest score possible.
-							<br>
-							<br>
-							<a href="https://github.com/Tawataka/VideoGame">
-										Giraffe repository</a> 
-								</h1>
-								<br>
-								<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
-								<br>  
-								<br> 
-										<a href="https://github.com/Tawataka/Gallery">Art Gallery</a>
-										
-						</h1> 
-						<br>
+							<div class="columns">
+								<div class= "column is-three-quarters">	
+										<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, ruby on rails, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
+											Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
+											Experience with the use of data structures, recursive functions and Database Systems. 
+											Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
+											Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
+										</h1> 
+										<br>
+								</div>
+								<div class= "column">	
+									<ul type="circle">
+										<li> • Bilingual</li>
+										<br>
+										<li> • Analytical Thinker</li>
+										<br>
+										<li> • Time Management</li>
+										<br>
+										<li> • Detail Oriented</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="gray-section" class="container is-fluid">
+						<div id="body-information">
+							<div id="body-information-gray-bottom">
+								<h1 class="title">PROJECTS</h1>
+									<br>
+									<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
+										that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
+									<br>
+									<br>
+									<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS">
+												UCSC Eats repository</a> 
+										</h1>
+										<br>
+										<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
+											You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
+											The goal is to make as many hunters explode as you can and get the highest score possible.
+									<br>
+									<br>
+									<a href="https://github.com/Tawataka/VideoGame">
+												Giraffe repository</a> 
+										</h1>
+										<br>
+										<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
+										<br>  
+										<br> 
+												<a href="https://github.com/Tawataka/Gallery">Art Gallery</a>
+												
+								</h1> 
+							</div>
+						</div>
 	        </div>
 	    </section>
 	    <section class="section" id="body-contact-information">
