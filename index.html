@@ -1,319 +1,385 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<base href="[[=URL('static')]]/">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<base href="[[=URL('static')]]/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"/>
-		
-		<style>
-			*{
-				padding: 5px;
-				margin:0px;
-				box-sizing: border-box;
-			}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"/>
+	
+	<style>
+		*{
+			padding: 5px;
+			margin:0px;
+			box-sizing: border-box;
+			font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'sans-serif'
+		}
 
-			.section{
-		  	padding: 0;		
-				margin: 0;	
+		.section{
+			padding: 0;		
+			margin: 0;	
+		}
+		table {
+			/* font-family: arial, sans-serif; */
+			border-collapse: collapse;
+			width: 100%;
+		}
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: center;
+			padding: 10px;
+		}
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+		#contact-information{
+			padding-left: 1em;
+		}
+		#resume{
+			/* display: none; */
+			margin: 0;
+			padding: 0;
+		}
+		#portafolio{
+			display: none;
+			margin: 0;
+			padding: 0;
+		}
+		#gallery{
+			display: none;
+			margin: 0;
+			padding: 0;
+		}
+		#profile-picture {
+			min-width: 10em; 
+			max-width: 30em;
+			padding-left: 2em;
+			padding-bottom: 2em;
+		}
+		#profile-picture-column{
+			align-content: right;
+			align-items: right;
+		}
+		#body-information{
+			margin-left: 10em;
+			margin-right: 10em;
+			padding-top: 5em;
+			padding-bottom: 2em;
+		}
+		#body-information-gray-bottom{
+			padding-bottom: 5em;
+		}
+		#body-contact-information{
+			padding-top: 3em;
+			padding-bottom: 3em;
+		}
+		#resume-tab, #portafolio-tab, #gallery-tab {
+			/* padding-left: 3em; */
+			padding-left: 2em;
+			padding-right: 2em;
+			padding-top: 1em;
+			padding-bottom: 1em;
+			border-top-right-radius: 1em;
+			border-top-left-radius: 1em;
+			margin: 0;
+		}
+		#banner-title{
+			padding-right: 2em;
+			padding-left: 2em;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+		#gray-section{
+			background-color: #dddddd;
+			margin: 0;
+		}
+		#white-section{
+			margin: 0;
+		}
+		.tab {
+			overflow: hidden;
+			/* border: 1px solid #ccc; */
+			background-color: rgb(255, 221, 87);
+			margin-top: 3em;
+		}
+		.tab a {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+		.tab a:hover {
+			background-color: rgb(216, 195, 4);
+		}
+		.tab a.active {
+			background-color: rgb(216, 195, 4);
+		}
+		.level .level-right{
+			padding: 0;
+		}
+		.hero{
+			padding: 0;
+		}
+	</style>
+	<script type="text/javascript">
+		function tabsPage(event, tabOption){
+			console.log(tabOption)
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
 			}
-			
-			.fa {
-				font-size: 20px;
-				cursor: pointer;
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
 			}
-
-			.fa:hover {
-				color: 	#FFD700;
-			}
-			table {
-			  font-family: arial, sans-serif;
-			  border-collapse: collapse;
-			  width: 100%;
-			}
-
-			td, th {
-			  border: 1px solid #dddddd;
-			  text-align: center;
-			  padding: 10px;
-			}
-			tr:nth-child(even) {
-			  background-color: #dddddd;
-			}
-			#profile-picture {
-				min-width: 10em; 
-				max-width: 30em;
-				padding-left: 2em;
-				padding-bottom: 2em;
-			}
-			#profile-picture-column{
-				align-content: right;
-				align-items: right;
-			}
-			#body-information{
-				margin-left: 10em;
-				margin-right: 10em;
-				padding-top: 5em;
-				/* padding-bottom: 0; */
-			}
-			#body-information-gray-bottom{
-				padding-bottom: 5em;
-			}
-			#body-contact-information{
-				padding-bottom: 3em;
-			}
-			#resume, #portafolio, #gallery {
-				padding-left: 3em;
-			}
-			#banner-title, #banner-options{
-				padding-right: 2em;
-				padding-left: 2em;
-			}
-			#gray-section{
-				background-color: #dddddd;
-			}
-
-		</style>
-
-	</head>
-	<body>
-			<div class="hero is-warning">
-						<div id="banner-title" class="level is-parent is-warning">
-							<div class="level-left is-child">
-									<h1 class="title">Tawa Reyna Villarreal</h1>
-							</div>
-							<div id="banner-options" class="level-right is-child">
-									<!-- <h1 class="subtitle">4757 Snyder Ln, Rohnert Park, CA <br>  831-524-6984  <br> tawareyna@gmail.com </h1> -->
-									<i id="resume"> Resume</i>
-									<i id="portafolio"> Portafolio</i>
-									<i id="gallery"> Gallery</i>
-							</div> 
-						</div>
+			event.currentTarget.className += " active";
+			document.getElementById(tabOption).style.display = "block";
+		}
+	</script>
+</head>
+<div class="hero is-warning">
+			<div id="banner-title" class="level is-parent is-warning">
+				<div class="level-left is-child">
+						<h1 class="title">Tawa Reyna Villarreal</h1>
+				</div>
+				<div class="level-right is-child tab">
+						<a class="tablinks title" onclick = "tabsPage(event, 'resume')" id="resume-tab">RESUME</a>
+						<a class="tablinks title" onclick = "tabsPage(event, 'portafolio')" id="portafolio-tab"> PORTAFOLIO</a>
+						<a class="tablinks title" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"> GALLERY</a>
+				</div> 
 			</div>
+</div>
 
-	    <section class="section">
-	        <div class="container is-fluid">
-	          <div class="columns " id="body-information">
-       				<div class= "column is-two-thirds">	
-       					<p class="title">PROFILE</p>
-       					<br>	             
-		                <h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front end, backend and UI/UX development. 
-											Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
-											True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
-										</h1> 
-										<br>
-										<br>
-										
-										<h1 class="title">EDUCATION</h1>
-										<br>
-		                <h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
-		                <br>
-		                <br>
-		                Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
-		                <br>
-		            </div>
-		            <div id="profile-picture-column" class= "column">
-	                <figure class="image">
-										<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
-									</figure>
-									<br>
+<section class="section tabcontent" id="resume">
+		<div id="white-section" class="container is-fluid">
+			<div class="columns " id="body-information">
+				<div class= "column is-two-thirds">	
+					<p class="title">PROFILE</p>
+					<br>	             
+							<h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front end, backend and UI/UX development. 
+								Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
+								True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
+							</h1> 
+							<br>
+							<br>
+							
+							<h1 class="title">EDUCATION</h1>
+							<br>
+							<h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
+							<br>
+							<br>
+							Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
+							<br>
+					</div>
+					<div id="profile-picture-column" class= "column">
+						<figure class="image">
+							<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
+						</figure>
+						<br>
+			
+					</div>
+			</div>
+		</div>
+			<!-- 
+				<h1 class="title">CLASSES</h1>
+			<br>
+
+			<TABLE>
+					<TR>
+						<TD>Math 23A</TD>
+						<TD>3D/Vector Calculus</TD>
+					</TR>
+					<TR>
+						<TD>CMPE 12</TD>
+						<TD>Computer Systems/Assembly Language</TD>
+					</TR>
+					<TR>
+						<TD>CMPS 12B</TD>
+						<TD>Data Structures in Java and C</TD>
+					</TR>
+					<TR>
+						<TD>CMPM 25</TD>
+						<TD>3D Modeling with Maya</TD>
+					</TR>
+					<TR>
+						<TD>CMPS 101</TD>
+						<TD>Abstract Data Types</TD>
+					</TR>
+					<TR>
+						<TD>CMPS 102</TD>
+						<TD>Analysis of Algorithms</TD>
+					</TR>
+					<TR>
+						<TD>CMPS 103</TD>
+						<TD>Computational Models</TD>
+					</TR>
+					<TR>
+						<TD>CMPE 107</TD>
+						<TD>Probability/Statistics in Engineering</TD>
+					</TR>
+					
+					<TR>
+						<TD>CMPE 110</TD>
+						<TD>Computer Architecture</TD>
+					</TR>
+					<TR>
+						<TD>CSE 112</TD>
+						<TD>Comparative Programming Languages</TD>
+					</TR>
+					<TR>
+						<TD>CSE 115A</TD>
+						<TD>Development and use of SCRUM</TD>
+					</TR>
+					<TR>
+						<TD>CSE 130</TD>
+						<TD>Computer System Design</TD>
+					</TR>
+					<TR>
+						<TD>CSE 140</TD>
+						<TD>Artificial Intelligence</TD>
+					</TR>
+					<TR>
+						<TD>CSE 144</TD>
+						<TD>Applied ML</TD>
+					</TR>
+					<TR>
+						<TD>CSE 180</TD>
+						<TD>Database Systems</TD>
+					</TR>
+					<TR>
+						<TD>CSE 183</TD>
+						<TD>Web Applications</TD>
+					</TR>
+
+			</TABLE>
 						
-								</div>
-						</div>
+							<br>
+							<br> -->
+		<div id="gray-section" class="container is-fluid">
+			<div id="body-information">
+				<h1 class="title">EMPLOYMENT HISTORY</h1>
+				<br>
+				<h1 class="subtitle">College Kickstart ............................................................................................................................................................................................................ 2021 - current </h1>
+
+				<ul type="circle">
+					<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
+					<br>
+					<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
+					<br>
+					<li> • Implemented agile methodologies and organization to maximize product development.</li>
+					<br>
+				</ul>
+				<br>
+				<h1 class="subtitle">ThinQ.tv ............................................................................................................................................................................................................................. 2020 </h1>
+
+				<ul type="circle">
+					<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
+					<br>
+					<li> • Collaborated with project managers to set milestones on
+						pre-release software project development.</li>
+					<br>
+					<li> • Implemented agile methodologies and effective
+						development practices to enhance product development.</li>
+					<br>
+				</ul>
+				<br>
+				<h1 class="subtitle">Veg on the Edge ............................................................................................................................................................................................................ 2019-2020 </h1>
+
+				<ul type="circle">
+					<li> • Cook, platter, dishwasher and worked register.</li>
+					<br>
+					<li> • Dealt with 500+ customers a day.</li>
+					<br>
+					<li> • Maintained well-stocked stations with supplies and
+						spices for maximum productivity.</li>
+					<br>
+				</ul>
+				<br>
+			</div>
+		</div>
+		<div id="white-section" class="container is-fluid">
+			<div id="body-information">
+				<h1 class="title">SKILLS/AWARDS</h1>
+				<br>
+				<div class="columns">
+					<div class= "column is-three-quarters">	
+							<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, ruby on rails, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
+								Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
+								Experience with the use of data structures, recursive functions and Database Systems. 
+								Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
+								Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
+							</h1> 
+							<br>
 					</div>
-						<!-- 
-	            <h1 class="title">CLASSES</h1>
- 						<br>
-
- 						<TABLE>
-						   <TR>
-						      <TD>Math 23A</TD>
-						      <TD>3D/Vector Calculus</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPE 12</TD>
-						      <TD>Computer Systems/Assembly Language</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPS 12B</TD>
-						      <TD>Data Structures in Java and C</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPM 25</TD>
-						      <TD>3D Modeling with Maya</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPS 101</TD>
-						      <TD>Abstract Data Types</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPS 102</TD>
-						      <TD>Analysis of Algorithms</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPS 103</TD>
-						      <TD>Computational Models</TD>
-						   </TR>
-						   <TR>
-						      <TD>CMPE 107</TD>
-						      <TD>Probability/Statistics in Engineering</TD>
-						   </TR>
-						   
-						   <TR>
-						      <TD>CMPE 110</TD>
-						      <TD>Computer Architecture</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 112</TD>
-						      <TD>Comparative Programming Languages</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 115A</TD>
-						      <TD>Development and use of SCRUM</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 130</TD>
-						      <TD>Computer System Design</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 140</TD>
-						      <TD>Artificial Intelligence</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 144</TD>
-						      <TD>Applied ML</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 180</TD>
-						      <TD>Database Systems</TD>
-						   </TR>
-						   <TR>
-						      <TD>CSE 183</TD>
-						      <TD>Web Applications</TD>
-						   </TR>
-
-						</TABLE>
-		              
-		                <br>
-		                <br> -->
-					<div id="gray-section" class="container is-fluid">
-						<div id="body-information">
-							<h1 class="title">EMPLOYMENT HISTORY</h1>
+					<div class= "column">	
+						<ul type="circle">
+							<li> • Bilingual</li>
 							<br>
-							<h1 class="subtitle">College Kickstart ...................................................................................................................................................................................................................... 2021 - current </h1>
-
-							<ul type="circle">
-								<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
-								<br>
-								<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
-								<br>
-								<li> • Implemented agile methodologies and organization to maximize product development.</li>
-								<br>
-							</ul>
+							<li> • Analytical Thinker</li>
 							<br>
-							<h1 class="subtitle">ThinQ.tv ....................................................................................................................................................................................................................................... 2020 </h1>
-
-							<ul type="circle">
-								<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
-								<br>
-								<li> • Collaborated with project managers to set milestones on
-									pre-release software project development.</li>
-								<br>
-								<li> • Implemented agile methodologies and effective
-									development practices to enhance product development.</li>
-								<br>
-							</ul>
+							<li> • Time Management</li>
 							<br>
-							<h1 class="subtitle">Veg on the Edge ...................................................................................................................................................................................................................... 2019-2020 </h1>
-
-							<ul type="circle">
-								<li> • Cook, platter, dishwasher and worked register.</li>
-								<br>
-								<li> • Dealt with 500+ customers a day.</li>
-								<br>
-								<li> • Maintained well-stocked stations with supplies and
-									spices for maximum productivity.</li>
-								<br>
-							</ul>
-							<br>
-						</div>
+							<li> • Detail Oriented</li>
+						</ul>
 					</div>
-					<div class="container is-fluid">
-						<div id="body-information">
-							<h1 class="title">SKILLS/AWARDS</h1>
+				</div>
+			</div>
+		</div>
+		<div id="gray-section" class="container is-fluid">
+			<div id="body-information">
+				<div id="body-information-gray-bottom">
+					<h1 class="title">PROJECTS</h1>
+						<br>
+						<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
+							that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
+						<br>
+						<br>
+						<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS">
+									UCSC Eats repository</a> 
+							</h1>
 							<br>
-							<div class="columns">
-								<div class= "column is-three-quarters">	
-										<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, ruby on rails, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
-											Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
-											Experience with the use of data structures, recursive functions and Database Systems. 
-											Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
-											Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
-										</h1> 
-										<br>
-								</div>
-								<div class= "column">	
-									<ul type="circle">
-										<li> • Bilingual</li>
-										<br>
-										<li> • Analytical Thinker</li>
-										<br>
-										<li> • Time Management</li>
-										<br>
-										<li> • Detail Oriented</li>
-									</ul>
-								</div>
-							</div>
+							<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
+								You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
+								The goal is to make as many hunters explode as you can and get the highest score possible.
+						<br>
+						<br>
+						<a href="https://github.com/Tawataka/VideoGame">
+									Giraffe repository</a> 
+							</h1>
+							<br>
+							<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
+							<br>  
+							<br> 
+									<a href="https://github.com/Tawataka/Gallery">Art Gallery</a>
+									
+					</h1> 
+				</div>
+			</div>
+		</div>
+</section>
+<section class="tabcontent" id="portafolio">
+	<h1>port</h1>
+</section>
+<section class="tabcontent" id="gallery">
+	<h1>gal</h1>
+</section>
+<section class="section" id="body-contact-information">
+		<div class="container is-fluid">
+				<div class="level is-parent">
+						<div class="level-left is-child">
+								<!-- <strong>contact information:</strong> -->
 						</div>
-					</div>
-					<div id="gray-section" class="container is-fluid">
-						<div id="body-information">
-							<div id="body-information-gray-bottom">
-								<h1 class="title">PROJECTS</h1>
-									<br>
-									<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
-										that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
-									<br>
-									<br>
-									<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS">
-												UCSC Eats repository</a> 
-										</h1>
-										<br>
-										<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
-											You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
-											The goal is to make as many hunters explode as you can and get the highest score possible.
-									<br>
-									<br>
-									<a href="https://github.com/Tawataka/VideoGame">
-												Giraffe repository</a> 
-										</h1>
-										<br>
-										<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
-										<br>  
-										<br> 
-												<a href="https://github.com/Tawataka/Gallery">Art Gallery</a>
-												
-								</h1> 
-							</div>
+						<div class="level-right is-child">
+							<h4 class="subtitle"> 
+								<p><strong>CONTACT INFORMATION:</strong></p>
+								<p id="contact-information">tawareyna@gmail.com</p>
+								<p id="contact-information">831-524-6984</p>
+							</h4>
 						</div>
-	        </div>
-	    </section>
-	    <section class="section" id="body-contact-information">
-	        <div class="container is-fluid">
-	            <div class="level is-parent notification">
-	                <div class="level-left is-child">
-	                    <strong>contact information:</strong>
-	                </div>
-	                <div class="level-right is-child">
-	                    <h4 class="subtitle"> 
-	                    	tawareyna@gmail.com
-	                    	<br>
-	                    	831-524-6984
-	                    </h4>
-	                </div>
-	            </div>
-	        </div>
-	    </section>
-	</body>
-</html>
+				</div>
+		</div>
+</section>
