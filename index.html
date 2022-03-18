@@ -57,6 +57,12 @@
 			min-width: 10em; 
 			max-width: 30em;
 			border-radius: 0.5em;
+			padding: 0;
+			border: 10px solid rgb(54,54,54);
+		}
+		#profile-picture-column .image{
+			border-radius: 0.5em;
+			background-color: rgb(54,54,54);
 		}
 		#profile-picture-column{
 			align-content: right;
@@ -170,23 +176,97 @@
 		}
 		.hero{
 			padding: 0;
+			/* position: sticky; */
+  		top: 0;
+			z-index: 10;
 		}
+		/* div.hero.active .level-right{
+			margin:0em;
+		} */
 		.shop-item, .shop-item-details{
 			padding: 0;
 			margin: 0;
+		}
+		.shop-item .image{
+			background-color: rgb(54,54,54);
+			border-radius: 0.5em;
 		}
 		.shop-item-image{
 			border: 10px solid rgb(54,54,54);
 			padding: 0;
 			margin: 0;
 			border-radius: 0.5em;
+			
 		}
 		.shop-item-title{
 			padding-top: 1em;
 			text-align: center;
 		}
+
+		#myImg:hover {opacity: 0.8;}
+		.modal {
+			display: none;
+			position: auto; 
+			z-index: 1;
+			padding-top: 50px;
+			padding-bottom: 50px;
+			/* overflow: auto; */
+			background-color: rgb(0,0,0);
+			background-color: rgba(0,0,0,0.9); 
+		}
+		.modal-content {
+			margin: fixed;
+			display: block;
+			height: 100%;
+			width: auto;
+		}
+		#modal-caption {
+			margin: auto;
+			display: block;
+			text-align: center;
+			color: #ccc;
+			padding: 10px 0;
+			height: 150px;
+		}
+		.modal-close-img {
+			position: absolute;
+			top: 15px;
+			right: 35px;
+			color: #f1f1f1;
+			font-size: 40px;
+			font-weight: bold;
+			transition: 0.3s;
+		}
+		.modal-close-img:hover,
+		.modal-close-img:focus {
+			color: #bbb;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
 	</style>
 	<script type="text/javascript">
+		let lastKnownScrollPosition = 0;
+		let ticking = false;
+
+		function doSomething(scrollPos) {
+				let hero = document.getElementById("banner");
+				hero.classList.add("active");
+		}
+
+		document.addEventListener('scroll', function(e) {
+			lastKnownScrollPosition = window.scrollY;
+
+			if (!ticking) {
+				window.requestAnimationFrame(function() {
+					doSomething(lastKnownScrollPosition);
+					ticking = false;
+				});
+
+				ticking = true;
+			}
+		});
+
 		function tabsPage(event, tabOption){
 			console.log(tabOption)
 			tabcontent = document.getElementsByClassName("tabcontent");
@@ -195,401 +275,471 @@
 			}
 			tablinks = document.getElementsByClassName("tablinks");
 			for (i = 0; i < tablinks.length; i++) {
+				console.log(tablinks[i])
 				tablinks[i].className = tablinks[i].className.replace(" active", "");
 			}
 			event.currentTarget.className += " active";
 			document.getElementById(tabOption).style.display = "block";
 		}
+
+		function zoomImage(event){
+			window.addEventListener('scroll', () => {
+				document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
+			});
+			const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
+			const body = document.body;
+			console.log(body);
+			body.style.height = '100vh';
+			body.style.overflow = 'hidden';
+
+			let modal = document.getElementById("myModal");
+			let img = document.getElementById("myImg");
+			let modalImg = document.getElementById("modal-img");
+			let captionText = document.getElementById("modal-caption");
+
+			modalImg.src = event.path[0].currentSrc;
+			modal.style.display = "block";
+			captionText.innerHTML = event.path[2].innerText;
+
+		}
+
+		function closeImage(event){
+			let modal = document.getElementById("myModal");
+			modal.style.display = "none";
+
+			const body = document.body;
+			const scrollY = body.style.top;
+			body.style.position = '';
+			body.style.top = '';
+			body.style.height = '';
+			body.style.overflowY = '';
+			window.scrollTo(0, parseInt(scrollY || '0') * -1);
+		}
 	</script>
 </head>
-<div class="hero is-warning">
-			<div id="banner-title" class="level is-parent is-warning">
-				<div class="level-left is-child">
-						<h1 class="title">Tawa Reyna Villarreal</h1>
+	<div id="banner" class="hero is-warning">
+				<div id="banner-title" class="level is-parent is-warning">
+					<div class="level-left is-child">
+							<h1 class="title">Tawa Reyna Villarreal</h1>
+					</div>
+					<div class="level-right is-child tab">
+							<a class="tablinks title active" onclick = "tabsPage(event, 'resume')" id="resume-tab"><span>RESUME</span></a>
+							<a class="tablinks title" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><span>PORTFOLIO</span></a>
+							<a class="tablinks title" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><span>GALLERY</span></a>
+					</div> 
 				</div>
-				<div class="level-right is-child tab">
-						<a class="tablinks title active" onclick = "tabsPage(event, 'resume')" id="resume-tab"><span>RESUME</span></a>
-						<a class="tablinks title" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><span>PORTFOLIO</span></a>
-						<a class="tablinks title" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><span>GALLERY</span></a>
-				</div> 
-			</div>
-</div>
+	</div>
 
-<section class="section tabcontent" id="resume">
-		<div id="body-title">
-			<p class="title">RESUME</p>
-		</div>
-		<div id="white-section" class="container is-fluid">
-			<div class="columns" id="body-information">
-				<div class= "column is-two-thirds">	
-					<p class="title">PROFILE</p>
-					<br>	             
-							<h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front end, backend and UI/UX development. 
-								Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
-								True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
-							</h1> 
-							<br>
-							<br>
+	<section class="section tabcontent" id="resume">
+			<div id="body-title">
+				<p class="title">RESUME</p>
+			</div>
+			<div id="white-section" class="container is-fluid">
+				<div class="columns" id="body-information">
+					<div class= "column is-two-thirds">	
+						<p class="title">PROFILE</p>
+						<br>	             
+								<h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front-end, back-end and UI/UX development. 
+									Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
+									True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
+								</h1> 
+								<br>
+								<br>
+								
+								<p class="title">EDUCATION</p>
+								<br>
+								<h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
+								<br>
+								<br>
+								Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
 							
-							<p class="title">EDUCATION</p>
-							<br>
-							<h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
-							<br>
-							<br>
-							Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
-						
-					</div>
-					<div id="profile-picture-column" class= "column">
-						<figure class="image">
-							<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
-						</figure>
-					</div>
+						</div>
+						<div id="profile-picture-column" class= "column">
+							<figure class="image">
+								<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
+							</figure>
+						</div>
+				</div>
 			</div>
-		</div>
-			<!-- 
-				<h1 class="title">CLASSES</h1>
-			<br>
+				<!-- 
+					<h1 class="title">CLASSES</h1>
+				<br>
 
-			<TABLE>
-					<TR>
-						<TD>Math 23A</TD>
-						<TD>3D/Vector Calculus</TD>
-					</TR>
-					<TR>
-						<TD>CMPE 12</TD>
-						<TD>Computer Systems/Assembly Language</TD>
-					</TR>
-					<TR>
-						<TD>CMPS 12B</TD>
-						<TD>Data Structures in Java and C</TD>
-					</TR>
-					<TR>
-						<TD>CMPM 25</TD>
-						<TD>3D Modeling with Maya</TD>
-					</TR>
-					<TR>
-						<TD>CMPS 101</TD>
-						<TD>Abstract Data Types</TD>
-					</TR>
-					<TR>
-						<TD>CMPS 102</TD>
-						<TD>Analysis of Algorithms</TD>
-					</TR>
-					<TR>
-						<TD>CMPS 103</TD>
-						<TD>Computational Models</TD>
-					</TR>
-					<TR>
-						<TD>CMPE 107</TD>
-						<TD>Probability/Statistics in Engineering</TD>
-					</TR>
-					
-					<TR>
-						<TD>CMPE 110</TD>
-						<TD>Computer Architecture</TD>
-					</TR>
-					<TR>
-						<TD>CSE 112</TD>
-						<TD>Comparative Programming Languages</TD>
-					</TR>
-					<TR>
-						<TD>CSE 115A</TD>
-						<TD>Development and use of SCRUM</TD>
-					</TR>
-					<TR>
-						<TD>CSE 130</TD>
-						<TD>Computer System Design</TD>
-					</TR>
-					<TR>
-						<TD>CSE 140</TD>
-						<TD>Artificial Intelligence</TD>
-					</TR>
-					<TR>
-						<TD>CSE 144</TD>
-						<TD>Applied ML</TD>
-					</TR>
-					<TR>
-						<TD>CSE 180</TD>
-						<TD>Database Systems</TD>
-					</TR>
-					<TR>
-						<TD>CSE 183</TD>
-						<TD>Web Applications</TD>
-					</TR>
-
-			</TABLE>
+				<TABLE>
+						<TR>
+							<TD>Math 23A</TD>
+							<TD>3D/Vector Calculus</TD>
+						</TR>
+						<TR>
+							<TD>CMPE 12</TD>
+							<TD>Computer Systems/Assembly Language</TD>
+						</TR>
+						<TR>
+							<TD>CMPS 12B</TD>
+							<TD>Data Structures in Java and C</TD>
+						</TR>
+						<TR>
+							<TD>CMPM 25</TD>
+							<TD>3D Modeling with Maya</TD>
+						</TR>
+						<TR>
+							<TD>CMPS 101</TD>
+							<TD>Abstract Data Types</TD>
+						</TR>
+						<TR>
+							<TD>CMPS 102</TD>
+							<TD>Analysis of Algorithms</TD>
+						</TR>
+						<TR>
+							<TD>CMPS 103</TD>
+							<TD>Computational Models</TD>
+						</TR>
+						<TR>
+							<TD>CMPE 107</TD>
+							<TD>Probability/Statistics in Engineering</TD>
+						</TR>
 						
-							<br>
-							<br> -->
-		<div id="gray-section" class="container is-fluid">
-			<div id="body-information">
-				<p class="title">EMPLOYMENT HISTORY</p>
-				<br>
-				<h1 class="subtitle">College Kickstart ............................................................................................................................................................................................................ 2021 - current </h1>
-				<ul type="circle">
-					<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
-					<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
-					<li> • Implemented agile methodologies and organization to maximize product development.</li>
-				</ul>
-				<br>
-				<h1 class="subtitle">ThinQ.tv ............................................................................................................................................................................................................................. 2020 </h1>
-				<ul type="circle">
-					<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
-					<li> • Collaborated with project managers to set milestones on
-						pre-release software project development.</li>
-					<li> • Implemented agile methodologies and effective
-						development practices to enhance product development.</li>
-				</ul>
-				<br>
-				<h1 class="subtitle">Veg on the Edge ............................................................................................................................................................................................................ 2019-2020 </h1>
-				<ul type="circle">
-					<li> • Cook, platter, dishwasher and worked register.</li>
-					<li> • Dealt with 500+ customers a day.</li>
-					<li> • Maintained well-stocked stations with supplies and
-						spices for maximum productivity.</li>
-				</ul>
+						<TR>
+							<TD>CMPE 110</TD>
+							<TD>Computer Architecture</TD>
+						</TR>
+						<TR>
+							<TD>CSE 112</TD>
+							<TD>Comparative Programming Languages</TD>
+						</TR>
+						<TR>
+							<TD>CSE 115A</TD>
+							<TD>Development and use of SCRUM</TD>
+						</TR>
+						<TR>
+							<TD>CSE 130</TD>
+							<TD>Computer System Design</TD>
+						</TR>
+						<TR>
+							<TD>CSE 140</TD>
+							<TD>Artificial Intelligence</TD>
+						</TR>
+						<TR>
+							<TD>CSE 144</TD>
+							<TD>Applied ML</TD>
+						</TR>
+						<TR>
+							<TD>CSE 180</TD>
+							<TD>Database Systems</TD>
+						</TR>
+						<TR>
+							<TD>CSE 183</TD>
+							<TD>Web Applications</TD>
+						</TR>
+
+				</TABLE>
+							
+								<br>
+								<br> -->
+			<div id="gray-section" class="container is-fluid">
+				<div id="body-information">
+					<p class="title">EMPLOYMENT HISTORY</p>
+					<br>
+					<h1 class="subtitle">College Kickstart ........................................................................................................................................................................................... 2021 - current </h1>
+					<ul type="circle">
+						<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
+						<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
+						<li> • Implemented agile methodologies and organization to maximize product development.</li>
+					</ul>
+					<br>
+					<h1 class="subtitle">ThinQ.tv ............................................................................................................................................................................................................................ 2020 </h1>
+					<ul type="circle">
+						<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
+						<li> • Collaborated with project managers to set milestones on
+							pre-release software project development.</li>
+						<li> • Implemented agile methodologies and effective
+							development practices to enhance product development.</li>
+					</ul>
+					<br>
+					<h1 class="subtitle">Veg on the Edge .................................................................................................................................................................................................. 2019 - 2020 </h1>
+					<ul type="circle">
+						<li> • Cook, platter, dishwasher and worked register.</li>
+						<li> • Dealt with 500+ customers a day.</li>
+						<li> • Maintained well-stocked stations with supplies and
+							spices for maximum productivity.</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div id="white-section" class="container is-fluid">
-			<div id="body-information">
-				<p class="title">SKILLS/AWARDS</p>
-				<br>
-				<div class="columns">
-					<div class= "column is-three-quarters">	
-							<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
-								Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
-								Experience with the use of data structures, recursive functions and Database Systems. 
-								Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
-								Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
-							</h1> 
-					</div>
-					<div class= "column">	
-						<ul type="circle">
-							<li> • Bilingual</li>
-							<li> • Analytical Thinking</li>
-							<li> • Time Management</li>
-							<li> • Detail Oriented</li>
-							<li> • Team Player</li>
-						</ul>
+			<div id="white-section" class="container is-fluid">
+				<div id="body-information">
+					<p class="title">SKILLS/AWARDS</p>
+					<br>
+					<div class="columns">
+						<div class= "column is-three-quarters">	
+								<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
+									Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
+									Experience with the use of data structures, recursive functions and Database Systems. 
+									Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
+									Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
+								</h1> 
+						</div>
+						<div class= "column">	
+							<ul type="circle">
+								<li> • Bilingual</li>
+								<li> • Analytical Thinking</li>
+								<li> • Time Management</li>
+								<li> • Detail Oriented</li>
+								<li> • Team Player</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="gray-section" class="container is-fluid">
-			<div id="body-information">
-				<div>
-					<p class="title">PROJECTS</p>
-						<br>
-						<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
-							that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
-						<br>
-						<br>
-						<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS">
-									UCSC Eats repository</a> 
-							</h1>
+			<div id="gray-section" class="container is-fluid">
+				<div id="body-information">
+					<div>
+						<p class="title">PROJECTS</p>
 							<br>
-							<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
-								You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
-								The goal is to make as many hunters explode as you can and get the highest score possible.
-						<br>
-						<br>
-						<a href="https://github.com/Tawataka/VideoGame">
-									Giraffe repository</a> 
-							</h1>
+							<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
+								that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
 							<br>
-							<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
-							<br>  
-							<br> 
-									<a href="https://github.com/Tawataka/Gallery">Art Gallery</a>
-									
-					</h1> 
+							<br>
+							<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS" target="_blank">
+										UCSC Eats repository</a> 
+								</h1>
+								<br>
+								<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
+									You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
+									The goal is to make as many hunters explode as you can and get the highest score possible.
+							<br>
+							<br>
+							<a href="https://github.com/Tawataka/VideoGame" target="_blank">
+										Giraffe repository</a> 
+								</h1>
+								<br>
+								<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
+								<br>  
+								<br> 
+										<a href="https://github.com/Tawataka/Gallery" target="_blank">Art Gallery</a>
+						</h1> 
+					</div>
 				</div>
 			</div>
+	</section>
+	<section class="tabcontent" id="portfolio">
+		<div id="body-title">
+			<p class="title">PORTFOLIO</p>
 		</div>
-</section>
-<section class="tabcontent" id="portfolio">
-	<div id="body-title">
-		<p class="title">PORTFOLIO</p>
-	</div>
-
-
-
-</section>
-<section class="tabcontent" id="gallery">
-	<div id="body-title">
-		<p class="title">GALLERY</p>
-	</div>
-	<div id="gallery-section" class="container is-fluid">
+		<div id="gallery-section" class="container is-fluid">
 			<div class="columns">
-					<div class= "column is-one-third">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/on_the_phone.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>On the Phone ( 16x20 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-							<br>
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/giraffe.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>Inside out Patio ( 16x16 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-							<br>
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/zebra.jpg">
-									</figure>
-									<h2 class="shop-item-title"><strong>La vi ( 8x10 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-					<div class= "column">
-						<div class="columns">
-							<div class= "column is-one-half">
-								<div class="tile is-parent">
-									<article id="body-information" class="tile is-child">
-										<div class="shop-item"> 
-											<figure class="image">
-													<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/san_francisco.jpeg">
-											</figure>
-											<h2 class="shop-item-title"><strong>Her Shape ( 11x14 )</strong></h2>
-											<div class="shop-item-details">
-											</div>
-										</div>
-									</article>
+				<div class= "column is-one-half">
+					<div class="tile is-parent is-vertical">
+						<article id="body-information" class="tile is-child">
+							<div class="shop-item">
+								<figure class="image">
+										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/add_student_panel.png">
+								</figure>
+								<!-- <h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2> -->
+								<div class="shop-item-details">
 								</div>
 							</div>
-							<div class= "column">
-								<div class="tile is-parent">
-									<article id="body-information" class="tile is-child">
-										<div class="shop-item">
-											<figure class="image">
-													<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/cafe.jpeg">
-											</figure>
-											<h2 class="shop-item-title"><strong>Reality ( 6x8 )</strong></h2>
-											<div class="shop-item-details">
-											</div>
-										</div>
-									</article>
+						</article>
+					</div>
+				</div>
+				<div class= "column">
+					<div class="tile is-parent is-vertical">
+						<article id="body-information" class="tile is-child">
+							<div class="shop-item">
+								<figure class="image">
+										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Add_student_upload_error.png">
+								</figure>
+								<!-- <h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2> -->
+								<div class="shop-item-details">
 								</div>
 							</div>
-						</div>
-						<div class="tile is-parent">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_catrin_trabajando.JPG">
-									</figure>
-									<h2 class="shop-item-title"><strong>Coffee ( 16x16 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
+						</article>
 					</div>
 				</div>
-				<div class= "columns">
-					<div class= "column is-two-thirds">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">	
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/under_the_moonlight.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>Under the Moonlight ( 24X36 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-					<div class= "column">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_venado.JPG">
-									</figure>
-									<h2 class="shop-item-title"><strong>Cliffs ( 6x12 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-				</div>
-				<div class="columns">
-					<div class= "column is-one-third">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_1.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>San Francisco ( 16x16 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-					<div class= "column is-one-third">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_2.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>San Francisco ( 16x16 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-					<div class="column">
-						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
-								<div class="shop-item">
-									<figure class="image">
-											<img class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_3.jpeg">
-									</figure>
-									<h2 class="shop-item-title"><strong>Suspended ( 16x20 )</strong></h2>
-									<div class="shop-item-details">
-									</div>
-								</div>
-							</article>
-						</div>
-					</div>
-				</div>
-	</div>
-</section>
-<section class="section" id="body-contact-information">
-		<div class="container is-fluid">
-				<div class="level is-parent">
-						<div class="level-left is-child">
-						</div>
-						<div class="level-right is-child">
-							<h4 class="subtitle"> 
-								<p><strong>CONTACT INFORMATION:</strong></p>
-								<p id="contact-information">tawareyna@gmail.com</p>
-								<p id="contact-information">831-524-6984</p>
-							</h4>
-						</div>
-				</div>
+			</div>
 		</div>
-</section>
+
+	</section>
+	<section class="tabcontent" id="gallery">
+		<div id="body-title">
+			<p class="title">GALLERY</p>
+		</div>
+		<div id="myModal" class="modal">
+			<span onclick = "closeImage(event)" class="modal-close-img">&times;</span>
+			<img class="modal-content" id="modal-img">
+			<div id="modal-caption"></div>
+		</div>
+		<div id="gallery-section" class="container is-fluid">
+				<div class="columns">
+						<div class= "column is-one-third">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/on_the_phone.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Cheetah On The Phone ( 16x20 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+								<br>
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/giraffe.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Giraffe On Bussiness ( 15x30 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+								<br>
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/zebra.jpg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Zebra Smoking ( 16x20 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class= "column">
+							<div class="columns">
+								<div class= "column is-one-half">
+									<div class="tile is-parent">
+										<article id="body-information" class="tile is-child">
+											<div class="shop-item"> 
+												<figure class="image">
+														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/san_francisco.jpeg">
+												</figure>
+												<h2 class="shop-item-title"><strong>San Francisco ( 16x16 )</strong></h2>
+												<div class="shop-item-details">
+												</div>
+											</div>
+										</article>
+									</div>
+								</div>
+								<div class= "column">
+									<div class="tile is-parent">
+										<article id="body-information" class="tile is-child">
+											<div class="shop-item">
+												<figure class="image">
+														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/cafe.jpeg">
+												</figure>
+												<h2 class="shop-item-title"><strong>Cafe ( 16x16 )</strong></h2>
+												<div class="shop-item-details">
+												</div>
+											</div>
+										</article>
+									</div>
+								</div>
+							</div>
+							<div class="tile is-parent">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_catrin_trabajando.JPG">
+										</figure>
+										<h2 class="shop-item-title"><strong>El Catrin Trabajando ( 24x30 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+					<div class= "columns">
+						<div class= "column is-two-thirds">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">	
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/under_the_moonlight.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Under The Moonlight ( 24X36 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class= "column">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_venado.JPG">
+										</figure>
+										<h2 class="shop-item-title"><strong>El Venado ( 16x20  )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+					<div class="columns">
+						<div class= "column is-one-third">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_1.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class= "column is-one-third">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_2.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+						<div class="column">
+							<div class="tile is-parent is-vertical">
+								<article id="body-information" class="tile is-child">
+									<div class="shop-item">
+										<figure class="image">
+												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_3.jpeg">
+										</figure>
+										<h2 class="shop-item-title"><strong>Lotus 3 ( 20x30 )</strong></h2>
+										<div class="shop-item-details">
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+		</div>
+	</section>
+	<section class="section" id="body-contact-information">
+			<div class="container is-fluid">
+					<div class="level is-parent">
+							<div class="level-left is-child">
+							</div>
+							<div class="level-right is-child">
+								<h4 class="subtitle"> 
+									<p>Don't be a stranger</p>
+									<p><strong>LETS WORK TOGETHER:</strong></p>
+									<p id="contact-information">tawareyna@gmail.com</p>
+									<p id="contact-information">831-524-6984</p>
+								</h4>
+							</div>
+					</div>
+			</div>
+	</section>
