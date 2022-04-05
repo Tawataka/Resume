@@ -4,7 +4,7 @@
 	<base href="[[=URL('static')]]/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"/>
 	
 	<style>
@@ -79,17 +79,17 @@
 		#body-title p{
 			font-size: 3em;
 		}
-		#body-information{
-			margin-left: 10em;
-			margin-right: 10em;
-			margin-bottom: 1.5em;
-			margin-top: 1.5em;
+		.body-information{
+			/* margin-left: 10em; */
+			/* margin-right: 10em; */
+			/* margin-bottom: 1.5em; */
+			/* margin-top: 1.5em; */
 			padding: 3em;
 			border-radius: 2em;
 			box-shadow: 2px 2px 2px rgb(218, 218, 218);
 			background-color: rgb(250, 250, 250);
 		}
-		#body-information ul li{
+		.body-information ul li{
 			padding-left: 1.5em;
 			padding-bottom: 0.5em;
 		}
@@ -147,7 +147,7 @@
 			margin-top: 3em;
 			color: rgb(180, 155, 54);
 		}
-		.tab a {
+		.tab .tablinks {
 			background-color: inherit;
 			float: left;
 			border: none;
@@ -157,19 +157,57 @@
 			transition: 0.3s;
 			font-size: 17px;
 		}
-		.tab a:hover {
+		.tab .tablinks.default:hover {
 			background-color: rgb(243, 242, 239);
 			/* color: rgb(202, 174, 62); */
 		}
-		.tab a.active {
+		.tab .tablinks.default.active {
 			background-color: rgb(243, 242, 239);
 			/* color: rgb(202, 174, 62); */
 		}
-		.tab a:hover span{
+		.tab .tablinks.default:hover span{
 			color: rgb(54,54,54);
 		}
-		.tab a.active span{
+		.tab .tablinks.default.active span{
 			color: rgb(54,54,54);
+		}
+		.tab .tablinks.darkmode:hover {
+			background-color: rgb(27,30,49);
+			/* color: rgb(202, 174, 62); */
+		}
+		.tab .tablinks.darkmode.active {
+			background-color: rgb(27,30,49);
+			/* color: rgb(202, 174, 62); */
+		}
+		.tab .tablinks.darkmode:hover span{
+			color: rgb(250,250,250);
+		}
+		.tab .tablinks.darkmode.active span{
+			color: rgb(250,250,250);
+		}
+		a #darkmode-button.default{
+			color: rgb(214, 184, 65);
+		}
+		a #darkmode-button.default:hover{
+			color: rgb(161, 139, 49);
+		}
+		a #darkmode-button.darkmode{
+			color: rgb(55, 106, 173);
+		}
+		a #darkmode-button.darkmode:hover{
+			color: rgb(88, 155, 243);
+		}
+		a.project-link.default{
+			color: rgb(214, 184, 65);
+		}
+		a.project-link.default:hover{
+			color: rgb(161, 139, 49);
+		}
+		a.project-link.darkmode{
+			color: rgb(55, 106, 173);
+		}
+		a.project-link.darkmode:hover{
+			color: rgb(88, 155, 243);
 		}
 		.level .level-right{
 			padding: 0;
@@ -212,7 +250,7 @@
 			padding-bottom: 50px;
 			/* overflow: auto; */
 			background-color: rgb(0,0,0);
-			background-color: rgba(0,0,0,0.9); 
+			background-color: rgba(0,0,0,0.9);
 		}
 		.modal-content {
 			margin: fixed;
@@ -246,6 +284,9 @@
 		.tile{
 			padding: 0em;
 		}
+		.fa{
+			font-size:40px;
+		}
 
 	</style>
 	<script type="text/javascript">
@@ -271,6 +312,86 @@
 		// 		ticking = true;
 		// 	}
 		// });
+		function toggleNightMode(event){
+			console.log(event.currentTarget.className);;
+			let darkmode = event.currentTarget.className.includes('moon')
+			if(darkmode){
+				event.currentTarget.className = event.currentTarget.className.replace("moon", "sun");
+				document.getElementById("resume").style.background="rgb(243, 242, 239)";
+				document.getElementById("gallery").style.background="rgb(243, 242, 239)";
+				document.getElementById("portfolio").style.background="rgb(243, 242, 239)";
+				document.getElementById("body-contact-information").style.background="rgb(243, 242, 239)";
+				let articles = document.getElementsByClassName("body-information");
+				for (let i=0; i<articles.length; i++) {
+            articles[i].style.backgroundColor = "rgb(250, 250, 250)";
+						articles[i].style.boxShadow = "2px 2px 2px rgb(218, 218, 218)";
+        }
+				document.getElementById("darkmode").style.color="rgb(54,54,54)";
+				let titles = document.getElementsByClassName("title");
+				for (let i=4; i<titles.length; i++) {
+            titles[i].style.color = "rgb(54,54,54)";
+        }
+				let subtitles = document.getElementsByClassName("subtitle");
+				for (let i=0; i<subtitles.length; i++) {
+            subtitles[i].style.color = "rgb(54,54,54)";
+        }
+				document.getElementById("profile-picture").style.border="10px solid rgb(54,54,54)";
+				let pictures = document.getElementsByClassName("shop-item-image");
+				let picturesBackground = document.getElementsByClassName("image");
+				for (let i=0; i<pictures.length; i++) {
+					pictures[i].style.border = "10px solid rgb(54,54,54)";
+					picturesBackground[i].style.backgroundColor = "rgb(54,54,54)";
+        }
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" darkmode", " default");
+				}
+				document.getElementsByClassName("fa")[0].className =  document.getElementsByClassName("fa")[0].className.replace(" darkmode", " default");
+				let projectLinks = document.getElementsByClassName("project-link");
+				for (i = 0; i < projectLinks.length; i++) {
+					console.log(projectLinks[i].className)
+					projectLinks[i].className = projectLinks[i].className.replace(" darkmode", " default");
+				}
+			} else {
+				event.currentTarget.className = event.currentTarget.className.replace("sun", "moon");
+				document.getElementById("resume").style.background="rgb(27,30,49)";
+				document.getElementById("gallery").style.background="rgb(27,30,49)";
+				document.getElementById("portfolio").style.background="rgb(27,30,49)";
+				document.getElementById("body-contact-information").style.background="rgb(27,30,49)";
+				let articles = document.getElementsByClassName("body-information");
+				for (let i=0; i<articles.length; i++) {
+            articles[i].style.backgroundColor = "rgb(31,34,55)";
+						articles[i].style.boxShadow = "2px 2px 2px rgb(15, 17, 27)";
+        }
+				document.getElementById("darkmode").style.color="rgb(250,250,250)";
+				let titles = document.getElementsByClassName("title");
+				for (let i=4; i<titles.length; i++) {
+            titles[i].style.color = "rgb(250,250,250)";
+        }
+				let subtitles = document.getElementsByClassName("subtitle");
+				for (let i=0; i<subtitles.length; i++) {
+            subtitles[i].style.color = "rgb(250,250,250)";
+        }
+
+				document.getElementById("profile-picture").style.border="10px solid rgb(250,250,250)";
+				let pictures = document.getElementsByClassName("shop-item-image");
+				let picturesBackground = document.getElementsByClassName("image");
+				for (let i=0; i<pictures.length; i++) {
+					pictures[i].style.border = "10px solid rgb(250,250,250)";
+					picturesBackground[i].style.backgroundColor = "rgb(250,250,250)";
+        }
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" default", " darkmode");
+				}
+				document.getElementsByClassName("fa")[0].className = document.getElementsByClassName("fa")[0].className.replace(" default", " darkmode");
+				let projectLinks = document.getElementsByClassName("project-link");
+				for (i = 0; i < projectLinks.length; i++) {
+					console.log(projectLinks[i].className)
+					projectLinks[i].className = projectLinks[i].className.replace(" default", " darkmode");
+				}
+			}
+		}
 
 		function tabsPage(event, tabOption){
 			sessionStorage.setItem('event', tabOption+'-tab');
@@ -335,15 +456,16 @@
 		init()
 	</script>
 </head>
+<body id="darkmode">
 	<div id="banner" class="hero is-warning">
 				<div id="banner-title" class="level is-parent is-warning">
 					<div class="level-left is-child">
 							<h1 class="title">Tawa Reyna Villarreal</h1>
 					</div>
 					<div class="level-right is-child tab">
-						<a class="tablinks title" onclick = "tabsPage(event, 'resume')" id="resume-tab"><span>RESUME</span></a>
-						<a class="tablinks title" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><span>PORTFOLIO</span></a>
-						<a class="tablinks title" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><span>GALLERY</span></a>
+						<a class="tablinks title default" onclick = "tabsPage(event, 'resume')" id="resume-tab"><span>RESUME</span></a>
+						<a class="tablinks title default" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><span>PORTFOLIO</span></a>
+						<a class="tablinks title default" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><span>GALLERY</span></a>
 					</div> 
 				</div>
 	</div>
@@ -360,7 +482,7 @@
 				<div class="columns">
 					<div class="column">	
 						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
+							<article class="body-information" class="tile is-child">
 								<div class="columns">
 									<div class= "column is-two-thirds">	 
 										<p class="title">PROFILE</p>
@@ -469,7 +591,7 @@
 				<div class="columns">
 					<div class="column">	
 						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
+							<article class="body-information" class="tile is-child">
 								<p class="title">EMPLOYMENT HISTORY</p>
 								<br>
 								<h1 class="subtitle">College Kickstart ........................................................................................................................................................................................... 2021 - current </h1>
@@ -504,7 +626,7 @@
 				<div class="columns">
 					<div class="column">	
 						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
+							<article class="body-information" class="tile is-child">
 								<p class="title">SKILLS/AWARDS</p>
 								<br>
 								<div class="columns">
@@ -535,14 +657,14 @@
 				<div class="columns">
 					<div class="column">	
 						<div class="tile is-parent is-vertical">
-							<article id="body-information" class="tile is-child">
+							<article class="body-information" class="tile is-child">
 								<p class="title">PROJECTS</p>
 								<br>
 								<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
 										that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
 									<br>
 									<br>
-									<a href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS" target="_blank">
+									<a class="project-link default" href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS" target="_blank">
 												UCSC Eats repository</a> 
 										</h1>
 										<br>
@@ -551,14 +673,14 @@
 											The goal is to make as many hunters explode as you can and get the highest score possible.
 									<br>
 									<br>
-									<a href="https://github.com/Tawataka/VideoGame" target="_blank">
-												Giraffe repository</a> 
+										<a class="project-link default" href="https://github.com/Tawataka/VideoGame" target="_blank">
+										Giraffe repository</a> 
 										</h1>
 										<br>
 										<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
 										<br>  
 										<br> 
-												<a href="https://github.com/Tawataka/Gallery" target="_blank">Art Gallery</a>
+										<a class="project-link default" href="https://github.com/Tawataka/Gallery" target="_blank">Art Gallery</a>
 								</h1> 
 							</article>
 						</div>
@@ -574,7 +696,7 @@
 			<div class="columns">
 				<div class= "column">	
 					<div class="tile is-parent is-vertical">
-					<article id="body-information" class="tile is-child">
+					<article class="body-information" class="tile is-child">
 						<!-- <div class="columns">
 							<div class= "column is-one-half"> -->
 								<p class="title">SERVICES</p>
@@ -596,12 +718,12 @@
 			<div class="columns">
 				<div class= "column">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/add_student_panel.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -612,12 +734,12 @@
 			<div class="columns">
 				<div class= "column">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Add_student_upload_error.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -628,12 +750,12 @@
 			<div class="columns">
 				<div class= "column">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/convert_student_panel.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -644,12 +766,12 @@
 			<div class="columns">
 				<div class= "column is-one-half">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_2.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -658,12 +780,12 @@
 				</div>
 				<div class= "column">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_edit_profile.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -674,12 +796,12 @@
 			<div class="columns">
 				<div class= "column is-one-half">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_1.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -688,12 +810,12 @@
 				</div>
 				<div class= "column">
 					<div class="tile is-parent is-vertical">
-						<article id="body-information" class="tile is-child">
+						<article class="body-information" class="tile is-child">
 							<div class="shop-item">
 								<figure class="image">
 										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/giraffe_home_screen.png">
 								</figure>
-								<!-- <h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2> -->
+								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
 								<div class="shop-item-details">
 								</div>
 							</div>
@@ -703,7 +825,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="tabcontent" id="gallery">
+	<section class="section tabcontent" id="gallery">
 		<div id="body-title">
 			<p class="title">GALLERY</p>
 		</div>
@@ -711,34 +833,34 @@
 				<div class="columns">
 						<div class= "column is-one-third">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/on_the_phone.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Cheetah On The Phone ( 16x20 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Cheetah On The Phone ( 16x20 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
 								</article>
 								<br>
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/giraffe.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Giraffe On Bussiness ( 15x30 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Giraffe On Bussiness ( 15x30 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
 								</article>
 								<br>
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/zebra.jpg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Zebra Smoking ( 16x20 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Zebra Smoking ( 16x20 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -749,12 +871,12 @@
 							<div class="columns">
 								<div class= "column is-one-half">
 									<div class="tile is-parent">
-										<article id="body-information" class="tile is-child">
+										<article class="body-information" class="tile is-child">
 											<div class="shop-item"> 
 												<figure class="image">
 														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/san_francisco.jpeg">
 												</figure>
-												<h2 class="shop-item-title"><strong>San Francisco ( 16x16 )</strong></h2>
+												<h2 class="shop-item-title"><strong class="subtitle">San Francisco ( 16x16 )</strong></h2>
 												<div class="shop-item-details">
 												</div>
 											</div>
@@ -763,12 +885,12 @@
 								</div>
 								<div class= "column">
 									<div class="tile is-parent">
-										<article id="body-information" class="tile is-child">
+										<article class="body-information" class="tile is-child">
 											<div class="shop-item">
 												<figure class="image">
 														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/cafe.jpeg">
 												</figure>
-												<h2 class="shop-item-title"><strong>Cafe ( 16x16 )</strong></h2>
+												<h2 class="shop-item-title"><strong class="subtitle">Cafe ( 16x16 )</strong></h2>
 												<div class="shop-item-details">
 												</div>
 											</div>
@@ -777,12 +899,12 @@
 								</div>
 							</div>
 							<div class="tile is-parent">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_catrin_trabajando.JPG">
 										</figure>
-										<h2 class="shop-item-title"><strong>El Catrin Trabajando ( 24x30 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">El Catrin Trabajando ( 24x30 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -793,12 +915,12 @@
 					<div class= "columns">
 						<div class= "column is-two-thirds">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">	
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/under_the_moonlight.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Under The Moonlight ( 24X36 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Under The Moonlight ( 24X36 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -807,12 +929,12 @@
 						</div>
 						<div class= "column">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_venado.JPG">
 										</figure>
-										<h2 class="shop-item-title"><strong>El Venado ( 16x20  )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">El Venado ( 16x20  )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -823,12 +945,12 @@
 					<div class="columns">
 						<div class= "column is-one-third">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_1.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>lotus 1 (20x30 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -837,12 +959,12 @@
 						</div>
 						<div class= "column is-one-third">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_2.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Lotus 2 ( 20x30 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -851,12 +973,12 @@
 						</div>
 						<div class="column">
 							<div class="tile is-parent is-vertical">
-								<article id="body-information" class="tile is-child">
+								<article class="body-information" class="tile is-child">
 									<div class="shop-item">
 										<figure class="image">
 												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_3.jpeg">
 										</figure>
-										<h2 class="shop-item-title"><strong>Lotus 3 ( 20x30 )</strong></h2>
+										<h2 class="shop-item-title"><strong class="subtitle">Lotus 3 ( 20x30 )</strong></h2>
 										<div class="shop-item-details">
 										</div>
 									</div>
@@ -870,11 +992,14 @@
 			<div class="container is-fluid">
 					<div class="level is-parent">
 							<div class="level-left is-child">
+								<h4 class="title"> 
+									<a><i id="darkmode-button" class="fa fa-sun-o default" onclick = "toggleNightMode(event)"></i></a>
+								</h4>
 							</div>
 							<div class="level-right is-child">
 								<h4 class="subtitle"> 
 									<p>Don't be a stranger</p>
-									<p><strong>LETS WORK TOGETHER:</strong></p>
+									<p><strong class="subtitle">LETS WORK TOGETHER:</strong></p>
 									<p id="contact-information">tawareyna@gmail.com</p>
 									<p id="contact-information">831-524-6984</p>
 								</h4>
@@ -882,3 +1007,4 @@
 					</div>
 			</div>
 	</section>
+</body>
