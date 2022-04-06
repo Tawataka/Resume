@@ -293,27 +293,7 @@
 		let lastKnownScrollPosition = 0;
 		let ticking = false;
 
-		// function scrollHandle(scrollPos) {
-		// 	console.log('scrollPos',scrollPos)
-		// 	let hero = document.getElementById("banner");
-		// 	hero.classList.add("active");
-		// }
-
-		// document.addEventListener('scroll', function(e) {
-		// 	lastKnownScrollPosition = window.scrollY;
-
-		// 	console.log(lastKnownScrollPosition);
-		// 	if (!ticking) {
-		// 		window.requestAnimationFrame(function() {
-		// 			scrollHandle(lastKnownScrollPosition);
-		// 			ticking = false;
-		// 		});
-
-		// 		ticking = true;
-		// 	}
-		// });
 		function toggleNightMode(event){
-			console.log(event.currentTarget.className);;
 			let darkmode = event.currentTarget.className.includes('moon')
 			if(darkmode){
 				event.currentTarget.className = event.currentTarget.className.replace("moon", "sun");
@@ -349,9 +329,9 @@
 				document.getElementsByClassName("fa")[0].className =  document.getElementsByClassName("fa")[0].className.replace(" darkmode", " default");
 				let projectLinks = document.getElementsByClassName("project-link");
 				for (i = 0; i < projectLinks.length; i++) {
-					console.log(projectLinks[i].className)
 					projectLinks[i].className = projectLinks[i].className.replace(" darkmode", " default");
 				}
+				sessionStorage.setItem('mode', 'lightmode');
 			} else {
 				event.currentTarget.className = event.currentTarget.className.replace("sun", "moon");
 				document.getElementById("resume").style.background="rgb(27,30,49)";
@@ -387,9 +367,9 @@
 				document.getElementsByClassName("fa")[0].className = document.getElementsByClassName("fa")[0].className.replace(" default", " darkmode");
 				let projectLinks = document.getElementsByClassName("project-link");
 				for (i = 0; i < projectLinks.length; i++) {
-					console.log(projectLinks[i].className)
 					projectLinks[i].className = projectLinks[i].className.replace(" default", " darkmode");
 				}
+				sessionStorage.setItem('mode', 'darkmode');
 			}
 		}
 
@@ -444,6 +424,13 @@
 		}
 
 		$(document).ready(function(){
+			let darkmode = sessionStorage.getItem('mode');
+			console.log(darkmode);
+			if(darkmode === 'darkmode'){
+				let darkModeButton = document.getElementById('darkmode-button');
+				darkModeButton.click();
+			}
+
 			let tabId = sessionStorage.getItem('event');
 			console.log(tabId);
 			if(tabId == null){
