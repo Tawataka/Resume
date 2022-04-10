@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<base href="[[=URL('static')]]/">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,13 +71,12 @@
 		#profile-picture-column{
 			align-content: right;
 			align-items: right;
-			padding-left: 2em;
-			padding-bottom: 2em;
+			/* padding-left: 2em;
+			padding-bottom: 2em; */
 		}
 		#body-title{
-			margin-left: 10em;
-			margin-right: 10em;
-			/* padding-bottom: 1.5em; */
+			width: 75%;
+			margin: auto;
 			padding-top: 4em;
 		}
 		#body-title p{
@@ -100,8 +103,8 @@
 			text-align: right;
 		}
 		#body-contact-information .container{
-			margin-left: 10em;
-			margin-right: 10em;
+			width: 75%;
+			margin: auto;
 			padding: 0;
 		}
 		#body-contact-information strong{
@@ -115,6 +118,8 @@
 			border-top-right-radius: 1em;
 			border-top-left-radius: 1em;
 			margin: 0;
+			/* width: 33%; */
+			/* height: 100%; */
 		}
 		#banner-title{
 			padding-right: 2em;
@@ -129,8 +134,8 @@
 			margin: 0;
 		}
 		#gallery-section{
-			margin-left: 10em;
-			margin-right: 10em;
+			width: 75%;
+			margin: auto;
 			padding-left: 0;
 			padding-top: 0;
 			padding-right: 0;
@@ -165,10 +170,10 @@
 			background-color: rgb(243, 242, 239);
 			/* color: rgb(202, 174, 62); */
 		}
-		.tab .tablinks.default:hover span{
+		.tab .tablinks.default:hover p{
 			color: rgb(54,54,54);
 		}
-		.tab .tablinks.default.active span{
+		.tab .tablinks.default.active p{
 			color: rgb(54,54,54);
 		}
 		.tab .tablinks.darkmode:hover {
@@ -179,10 +184,10 @@
 			background-color: rgb(27,30,49);
 			/* color: rgb(202, 174, 62); */
 		}
-		.tab .tablinks.darkmode:hover span{
+		.tab .tablinks.darkmode:hover p{
 			color: rgb(250,250,250);
 		}
-		.tab .tablinks.darkmode.active span{
+		.tab .tablinks.darkmode.active p{
 			color: rgb(250,250,250);
 		}
 		a #darkmode-button.default{
@@ -211,6 +216,7 @@
 		}
 		.level .level-right{
 			padding: 0;
+			float: right;
 		}
 		.hero{
 			padding: 0;
@@ -246,16 +252,16 @@
 			display: none;
 			position: auto; 
 			z-index: 1;
-			padding-top: 50px;
+			padding-top: 70px;
 			padding-bottom: 50px;
-			/* overflow: auto; */
+			margin: auto;
 			background-color: rgb(0,0,0);
 			background-color: rgba(0,0,0,0.9);
 		}
 		.modal-content {
-			margin: fixed;
-			display: block;
-			height: 100%;
+			margin: auto;
+			display: auto;
+			max-height: 100%;
 			width: auto;
 		}
 		#modal-caption {
@@ -443,555 +449,561 @@
 		init()
 	</script>
 </head>
-<body id="darkmode">
-	<div id="banner" class="hero is-warning">
-				<div id="banner-title" class="level is-parent is-warning">
-					<div class="level-left is-child">
-							<h1 class="title">Tawa Reyna Villarreal</h1>
+<html lang="en">
+	<body id="darkmode">
+		<div id="banner" class="hero is-warning">
+					<div id="banner-title" class="level is-parent is-warning">
+						<div class="level-left is-child">
+								<h1 class="title">Tawa Reyna Villarreal</h1>
+						</div>
+						<div class="level-right is-child tab">
+							<a class="tablinks title default" onclick = "tabsPage(event, 'resume')" id="resume-tab"><p>RESUME</p></a>
+							<a class="tablinks title default" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><p>PORTFOLIO</p></a>
+							<a class="tablinks title default" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><p>GALLERY</p></a>
+						</div> 
 					</div>
-					<div class="level-right is-child tab">
-						<a class="tablinks title default" onclick = "tabsPage(event, 'resume')" id="resume-tab"><span>RESUME</span></a>
-						<a class="tablinks title default" onclick = "tabsPage(event, 'portfolio')" id="portfolio-tab"><span>PORTFOLIO</span></a>
-						<a class="tablinks title default" onclick = "tabsPage(event, 'gallery')" id="gallery-tab"><span>GALLERY</span></a>
-					</div> 
+		</div>
+		<div id="myModal" class="modal">
+			<span onclick = "closeImage(event)" class="modal-close-img">&times;</span>
+			<img class="modal-content" id="modal-img">
+			<div id="modal-caption"></div>
+		</div>
+		<section class="section tabcontent" id="resume">
+				<div id="body-title">
+					<p class="title">RESUME</p>
 				</div>
-	</div>
-	<div id="myModal" class="modal">
-		<span onclick = "closeImage(event)" class="modal-close-img">&times;</span>
-		<img class="modal-content" id="modal-img">
-		<div id="modal-caption"></div>
-	</div>
-	<section class="section tabcontent" id="resume">
+				<div id="gallery-section" class="container is-fluid">
+					<div class="columns">
+						<div class="column">	
+							<div class="tile is-parent is-vertical">
+								<article class="body-information" class="tile is-child">
+									<div class="columns">
+										<div class= "column is-two-thirds">	 
+											<p class="title">PROFILE</p>
+											<br>	             
+											<h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front-end, back-end and UI/UX development. 
+												Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
+												True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
+											</h1> 
+											<br>
+											<br>
+											
+											<p class="title">EDUCATION</p>
+											<br>
+											<h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
+											<br>
+											<br>
+											Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
+										
+										</div>
+										<div id="profile-picture-column" class= "column">
+											<figure class="image">
+												<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
+											</figure>
+										</div>
+									</div>	
+								</article>
+							</div>
+						</div>
+					</div>
+					<!-- 
+						<h1 class="title">CLASSES</h1>
+					<br>
+
+					<TABLE>
+							<TR>
+								<TD>Math 23A</TD>
+								<TD>3D/Vector Calculus</TD>
+							</TR>
+							<TR>
+								<TD>CMPE 12</TD>
+								<TD>Computer Systems/Assembly Language</TD>
+							</TR>
+							<TR>
+								<TD>CMPS 12B</TD>
+								<TD>Data Structures in Java and C</TD>
+							</TR>
+							<TR>
+								<TD>CMPM 25</TD>
+								<TD>3D Modeling with Maya</TD>
+							</TR>
+							<TR>
+								<TD>CMPS 101</TD>
+								<TD>Abstract Data Types</TD>
+							</TR>
+							<TR>
+								<TD>CMPS 102</TD>
+								<TD>Analysis of Algorithms</TD>
+							</TR>
+							<TR>
+								<TD>CMPS 103</TD>
+								<TD>Computational Models</TD>
+							</TR>
+							<TR>
+								<TD>CMPE 107</TD>
+								<TD>Probability/Statistics in Engineering</TD>
+							</TR>
+							
+							<TR>
+								<TD>CMPE 110</TD>
+								<TD>Computer Architecture</TD>
+							</TR>
+							<TR>
+								<TD>CSE 112</TD>
+								<TD>Comparative Programming Languages</TD>
+							</TR>
+							<TR>
+								<TD>CSE 115A</TD>
+								<TD>Development and use of SCRUM</TD>
+							</TR>
+							<TR>
+								<TD>CSE 130</TD>
+								<TD>Computer System Design</TD>
+							</TR>
+							<TR>
+								<TD>CSE 140</TD>
+								<TD>Artificial Intelligence</TD>
+							</TR>
+							<TR>
+								<TD>CSE 144</TD>
+								<TD>Applied ML</TD>
+							</TR>
+							<TR>
+								<TD>CSE 180</TD>
+								<TD>Database Systems</TD>
+							</TR>
+							<TR>
+								<TD>CSE 183</TD>
+								<TD>Web Applications</TD>
+							</TR>
+
+					</TABLE>
+								
+									<br>
+									<br> -->
+					<!-- <div id="gray-section" class="container is-fluid"> -->
+					<div class="columns">
+						<div class="column">	
+							<div class="tile is-parent is-vertical">
+								<article class="body-information" class="tile is-child">
+									<p class="title">EMPLOYMENT HISTORY</p>
+									<br>
+									<h1 class="subtitle">College Kickstart ........................................................................................................................................................................................... 2021 - current </h1>
+									<ul type="circle">
+										<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
+										<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
+										<li> • Implemented agile methodologies and organization to maximize product development.</li>
+									</ul>
+									<br>
+									<h1 class="subtitle">ThinQ.tv ............................................................................................................................................................................................................................ 2020 </h1>
+									<ul type="circle">
+										<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
+										<li> • Collaborated with project managers to set milestones on
+											pre-release software project development.</li>
+										<li> • Implemented agile methodologies and effective
+											development practices to enhance product development.</li>
+									</ul>
+									<br>
+									<h1 class="subtitle">Veg on the Edge .................................................................................................................................................................................................. 2019 - 2020 </h1>
+									<ul type="circle">
+										<li> • Cook, platter, dishwasher and worked register.</li>
+										<li> • Dealt with 500+ customers a day.</li>
+										<li> • Maintained well-stocked stations with supplies and
+											spices for maximum productivity.</li>
+									</ul>
+								</article>
+							</div>
+						</div>
+					</div>
+			
+					<!-- <div id="white-section" class="container is-fluid"> -->
+					<div class="columns">
+						<div class="column">	
+							<div class="tile is-parent is-vertical">
+								<article class="body-information" class="tile is-child">
+									<p class="title">SKILLS/AWARDS</p>
+									<br>
+									<div class="columns">
+										<div class= "column is-three-quarters">	
+												<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
+													Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
+													Experience with the use of data structures, recursive functions and Database Systems. 
+													Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
+													Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
+												</h1> 
+										</div>
+										<div class= "column">	
+											<ul type="circle">
+												<li> • Bilingual</li>
+												<li> • Analytical Thinking</li>
+												<li> • Time Management</li>
+												<li> • Detail Oriented</li>
+												<li> • Team Player</li>
+											</ul>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+					<!-- </div>
+					<div id="gray-section" class="container is-fluid"> -->
+					<div class="columns">
+						<div class="column">	
+							<div class="tile is-parent is-vertical">
+								<article class="body-information" class="tile is-child">
+									<p class="title">PROJECTS</p>
+									<br>
+									<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
+											that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
+										<br>
+										<br>
+										<a class="project-link default" href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS" target="_blank">
+													UCSC Eats repository</a> 
+											</h1>
+											<br>
+											<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
+												You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
+												The goal is to make as many hunters explode as you can and get the highest score possible.
+										<br>
+										<br>
+											<a class="project-link default" href="https://github.com/Tawataka/VideoGame" target="_blank">
+											Giraffe repository</a> 
+											</h1>
+											<br>
+											<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
+											<br>  
+											<br> 
+											<a class="project-link default" href="https://github.com/Tawataka/Gallery" target="_blank">Art Gallery</a>
+									</h1> 
+								</article>
+							</div>
+						</div>
+					</div>
+				</div>
+		</section>
+		<section class="section tabcontent" id="portfolio">
 			<div id="body-title">
-				<p class="title">RESUME</p>
+				<p class="title">PORTFOLIO</p>
 			</div>
 			<div id="gallery-section" class="container is-fluid">
 				<div class="columns">
-					<div class="column">	
+					<div class= "column">	
 						<div class="tile is-parent is-vertical">
-							<article class="body-information" class="tile is-child">
-								<div class="columns">
-									<div class= "column is-two-thirds">	 
-										<p class="title">PROFILE</p>
-										<br>	             
-										<h1 class="subtitle"> Bilingual: English/Spanish. Multitalented Software Developer with experience in front-end, back-end and UI/UX development. 
-											Demonstrated excellent skills in JavaScript, Typescript, HTML, CSS, PHP and MySQL. 
-											True team player with strengths in adaptability and accuracy, always striving to exceed expectations.
-										</h1> 
-										<br>
-										<br>
-										
-										<p class="title">EDUCATION</p>
-										<br>
-										<h1 class="subtitle">University of California Santa Cruz ......................................................................... June 2021 
-										<br>
-										<br>
-										Bachelors in Science in Computer Science .......................................................... GPA: 3.75 </h1> 
-									
-									</div>
-									<div id="profile-picture-column" class= "column">
-										<figure class="image">
-											<img id="profile-picture" src="https://tawataka.github.io/Resume/img/profile.jpg">
-										</figure>
-									</div>
-								</div>	
-							</article>
-						</div>
-					</div>
-				</div>
-				<!-- 
-					<h1 class="title">CLASSES</h1>
-				<br>
+						<article class="body-information" class="tile is-child">
+							<!-- <div class="columns">
+								<div class= "column is-one-half"> -->
+									<p class="title">SERVICES</p>
+									<br>	             
+									<h1 class="subtitle"> With years of design and development experience I can help 
+										create, grow and foster connections with your customers. In a digitalized society 
+										first impressions often come from how we present ourselves online. This is where I 
+										come in, I can assist by making your online presense stand out and proffecional.
+									</h1>
+								<!-- </div>
+								<div class="column">
 
-				<TABLE>
-						<TR>
-							<TD>Math 23A</TD>
-							<TD>3D/Vector Calculus</TD>
-						</TR>
-						<TR>
-							<TD>CMPE 12</TD>
-							<TD>Computer Systems/Assembly Language</TD>
-						</TR>
-						<TR>
-							<TD>CMPS 12B</TD>
-							<TD>Data Structures in Java and C</TD>
-						</TR>
-						<TR>
-							<TD>CMPM 25</TD>
-							<TD>3D Modeling with Maya</TD>
-						</TR>
-						<TR>
-							<TD>CMPS 101</TD>
-							<TD>Abstract Data Types</TD>
-						</TR>
-						<TR>
-							<TD>CMPS 102</TD>
-							<TD>Analysis of Algorithms</TD>
-						</TR>
-						<TR>
-							<TD>CMPS 103</TD>
-							<TD>Computational Models</TD>
-						</TR>
-						<TR>
-							<TD>CMPE 107</TD>
-							<TD>Probability/Statistics in Engineering</TD>
-						</TR>
-						
-						<TR>
-							<TD>CMPE 110</TD>
-							<TD>Computer Architecture</TD>
-						</TR>
-						<TR>
-							<TD>CSE 112</TD>
-							<TD>Comparative Programming Languages</TD>
-						</TR>
-						<TR>
-							<TD>CSE 115A</TD>
-							<TD>Development and use of SCRUM</TD>
-						</TR>
-						<TR>
-							<TD>CSE 130</TD>
-							<TD>Computer System Design</TD>
-						</TR>
-						<TR>
-							<TD>CSE 140</TD>
-							<TD>Artificial Intelligence</TD>
-						</TR>
-						<TR>
-							<TD>CSE 144</TD>
-							<TD>Applied ML</TD>
-						</TR>
-						<TR>
-							<TD>CSE 180</TD>
-							<TD>Database Systems</TD>
-						</TR>
-						<TR>
-							<TD>CSE 183</TD>
-							<TD>Web Applications</TD>
-						</TR>
-
-				</TABLE>
-							
-								<br>
-								<br> -->
-				<!-- <div id="gray-section" class="container is-fluid"> -->
-				<div class="columns">
-					<div class="column">	
-						<div class="tile is-parent is-vertical">
-							<article class="body-information" class="tile is-child">
-								<p class="title">EMPLOYMENT HISTORY</p>
-								<br>
-								<h1 class="subtitle">College Kickstart ........................................................................................................................................................................................... 2021 - current </h1>
-								<ul type="circle">
-									<li> • Full stack developer using Jquery, JS, HTML, CSS, PHP, MySQL, Node.js, Svelte and TS.</li>
-									<li> • Collaborated with project manager and team members to produce readable and well tested code.</li>
-									<li> • Implemented agile methodologies and organization to maximize product development.</li>
-								</ul>
-								<br>
-								<h1 class="subtitle">ThinQ.tv ............................................................................................................................................................................................................................ 2020 </h1>
-								<ul type="circle">
-									<li> • Full stack developer using ruby on rails, JS, HTML and CSS.</li>
-									<li> • Collaborated with project managers to set milestones on
-										pre-release software project development.</li>
-									<li> • Implemented agile methodologies and effective
-										development practices to enhance product development.</li>
-								</ul>
-								<br>
-								<h1 class="subtitle">Veg on the Edge .................................................................................................................................................................................................. 2019 - 2020 </h1>
-								<ul type="circle">
-									<li> • Cook, platter, dishwasher and worked register.</li>
-									<li> • Dealt with 500+ customers a day.</li>
-									<li> • Maintained well-stocked stations with supplies and
-										spices for maximum productivity.</li>
-								</ul>
-							</article>
+								</div>
+							</div>  -->
+						</article>
 						</div>
 					</div>
 				</div>
-		
-				<!-- <div id="white-section" class="container is-fluid"> -->
 				<div class="columns">
-					<div class="column">	
+					<div class= "column">
 						<div class="tile is-parent is-vertical">
 							<article class="body-information" class="tile is-child">
-								<p class="title">SKILLS/AWARDS</p>
-								<br>
-								<div class="columns">
-									<div class= "column is-three-quarters">	
-											<h1 class="subtitle"> Fluent in the following programing languages: Java, swift, HTML, CSS, Javascript, Typescript, PHP, MySQL, Dart and Python. 
-												Experience utilizing React, Node.js, Svelte, JQuery and Ruby on Rails for web and mobile app development.
-												Experience with the use of data structures, recursive functions and Database Systems. 
-												Certified by Microsoft in the computer programs of Word, PowerPoint and Excel. 
-												Received undergraduate Honors in the quarter of winter 2018, spring 2018, winter 2019, Spring 2019, Winter 2020 and Spring 2020. 
-											</h1> 
-									</div>
-									<div class= "column">	
-										<ul type="circle">
-											<li> • Bilingual</li>
-											<li> • Analytical Thinking</li>
-											<li> • Time Management</li>
-											<li> • Detail Oriented</li>
-											<li> • Team Player</li>
-										</ul>
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/add_student_panel.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
+									<div class="shop-item-details">
 									</div>
 								</div>
 							</article>
 						</div>
 					</div>
 				</div>
-				<!-- </div>
-				<div id="gray-section" class="container is-fluid"> -->
 				<div class="columns">
-					<div class="column">	
+					<div class= "column">
 						<div class="tile is-parent is-vertical">
 							<article class="body-information" class="tile is-child">
-								<p class="title">PROJECTS</p>
-								<br>
-								<h1 class="subtitle"> IOS Application: "UCSC Eats", is an application for students attending the University of California Santa Cruz 
-										that want to know the day to day menu off all dining halls and cafes on the campus, as well as know the busiest hours of the establishments.
-									<br>
-									<br>
-									<a class="project-link default" href="https://github.com/JonathanAlvareza/UCSC-Eats/tree/master/UCSC%20EATS" target="_blank">
-												UCSC Eats repository</a> 
-										</h1>
-										<br>
-										<h1 class="subtitle"> IOS Application: "Giraffe", You are an all powerful giraffe that has harnesses magic given to you by the gods. 
-											You must protect the land of your ancestors by defending yourself from hunters that want to colonize the territory. 
-											The goal is to make as many hunters explode as you can and get the highest score possible.
-									<br>
-									<br>
-										<a class="project-link default" href="https://github.com/Tawataka/VideoGame" target="_blank">
-										Giraffe repository</a> 
-										</h1>
-										<br>
-										<h1 class="subtitle"> Art Gallery Website: I have always been creating and wanted to combine both of my passions(painting and software development). This is a website to share and sell the paintings I have made. Integrated shopping cart and payment method.
-										<br>  
-										<br> 
-										<a class="project-link default" href="https://github.com/Tawataka/Gallery" target="_blank">Art Gallery</a>
-								</h1> 
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Add_student_upload_error.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="columns">
+					<div class= "column">
+						<div class="tile is-parent is-vertical">
+							<article class="body-information" class="tile is-child">
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/convert_student_panel.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="columns">
+					<div class= "column is-one-half">
+						<div class="tile is-parent is-vertical">
+							<article class="body-information" class="tile is-child">
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_2.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class= "column">
+						<div class="tile is-parent is-vertical">
+							<article class="body-information" class="tile is-child">
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_edit_profile.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="columns">
+					<div class= "column is-one-half">
+						<div class="tile is-parent is-vertical">
+							<article class="body-information" class="tile is-child">
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_1.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<div class= "column">
+						<div class="tile is-parent is-vertical">
+							<article class="body-information" class="tile is-child">
+								<div class="shop-item">
+									<figure class="image">
+											<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/giraffe_home_screen.png">
+									</figure>
+									<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
+									<div class="shop-item-details">
+									</div>
+								</div>
 							</article>
 						</div>
 					</div>
 				</div>
 			</div>
-	</section>
-	<section class="section tabcontent" id="portfolio">
-		<div id="body-title">
-			<p class="title">PORTFOLIO</p>
-		</div>
-		<div id="gallery-section" class="container is-fluid">
-			<div class="columns">
-				<div class= "column">	
-					<div class="tile is-parent is-vertical">
-					<article class="body-information" class="tile is-child">
-						<!-- <div class="columns">
-							<div class= "column is-one-half"> -->
-								<p class="title">SERVICES</p>
-								<br>	             
-								<h1 class="subtitle"> With years of design and development experience I can help 
-									create, grow and foster connections with your customers. In a digitalized society 
-									first impressions often come from how we present ourselves online. This is where I 
-									come in, I can assist by making your online presense stand out and proffecional.
-								</h1>
-							<!-- </div>
-							<div class="column">
-
-							</div>
-						</div>  -->
-					</article>
-					</div>
-				</div>
+		</section>
+		<section class="section tabcontent" id="gallery">
+			<div id="body-title">
+				<p class="title">GALLERY</p>
 			</div>
-			<div class="columns">
-				<div class= "column">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/add_student_panel.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-			<div class="columns">
-				<div class= "column">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Add_student_upload_error.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-			<div class="columns">
-				<div class= "column">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/convert_student_panel.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-			<div class="columns">
-				<div class= "column is-one-half">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_2.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class= "column">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_edit_profile.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-			<div class="columns">
-				<div class= "column is-one-half">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/Thinqtv_profile_1.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-				<div class= "column">
-					<div class="tile is-parent is-vertical">
-						<article class="body-information" class="tile is-child">
-							<div class="shop-item">
-								<figure class="image">
-										<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/portafolio/giraffe_home_screen.png">
-								</figure>
-								<!-- <h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2> -->
-								<div class="shop-item-details">
-								</div>
-							</div>
-						</article>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section tabcontent" id="gallery">
-		<div id="body-title">
-			<p class="title">GALLERY</p>
-		</div>
-		<div id="gallery-section" class="container is-fluid">
-				<div class="columns">
-						<div class= "column is-one-third">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/on_the_phone.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Cheetah On The Phone ( 16x20 )</strong></h2>
-										<div class="shop-item-details">
-										</div>
-									</div>
-								</article>
-								<br>
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/giraffe.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Giraffe On Bussiness ( 15x30 )</strong></h2>
-										<div class="shop-item-details">
-										</div>
-									</div>
-								</article>
-								<br>
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/zebra.jpg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Zebra Smoking ( 16x20 )</strong></h2>
-										<div class="shop-item-details">
-										</div>
-									</div>
-								</article>
-							</div>
-						</div>
-						<div class= "column">
-							<div class="columns">
-								<div class= "column is-one-half">
-									<div class="tile is-parent">
-										<article class="body-information" class="tile is-child">
-											<div class="shop-item"> 
-												<figure class="image">
-														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/san_francisco.jpeg">
-												</figure>
-												<h2 class="shop-item-title"><strong class="subtitle">San Francisco ( 16x16 )</strong></h2>
-												<div class="shop-item-details">
-												</div>
+			<div id="gallery-section" class="container is-fluid">
+					<div class="columns">
+							<div class= "column is-one-third">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/on_the_phone.jpeg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">Cheetah On The Phone ( 16x20 )</strong></h2>
+											<div class="shop-item-details">
 											</div>
-										</article>
-									</div>
+										</div>
+									</article>
 								</div>
-								<div class= "column">
-									<div class="tile is-parent">
+								<div style="padding-top:1.5em; padding-bottom:1.5em; padding-left:0; padding-right:0">
+									<div class="tile is-parent is-vertical">
 										<article class="body-information" class="tile is-child">
 											<div class="shop-item">
 												<figure class="image">
-														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/cafe.jpeg">
+														<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/giraffe.jpeg">
 												</figure>
-												<h2 class="shop-item-title"><strong class="subtitle">Cafe ( 16x16 )</strong></h2>
+												<h2 class="shop-item-title"><strong class="subtitle">Giraffe On Bussiness ( 15x30 )</strong></h2>
 												<div class="shop-item-details">
 												</div>
 											</div>
 										</article>
 									</div>
 								</div>
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/zebra.jpg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">Zebra Smoking ( 16x20 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
+										</div>
+									</article>
+								</div>
 							</div>
-							<div class="tile is-parent">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_catrin_trabajando.JPG">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">El Catrin Trabajando ( 24x30 )</strong></h2>
-										<div class="shop-item-details">
+							<div class= "column">
+								<div class="columns">
+									<div class= "column is-one-half">
+										<div class="tile is-parent">
+											<article class="body-information" class="tile is-child">
+												<div class="shop-item"> 
+													<figure class="image">
+															<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/san_francisco.jpeg">
+													</figure>
+													<h2 class="shop-item-title"><strong class="subtitle">San Francisco ( 16x16 )</strong></h2>
+													<div class="shop-item-details">
+													</div>
+												</div>
+											</article>
 										</div>
 									</div>
-								</article>
-							</div>
-						</div>
-					</div>
-					<div class= "columns">
-						<div class= "column is-two-thirds">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">	
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/under_the_moonlight.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Under The Moonlight ( 24X36 )</strong></h2>
-										<div class="shop-item-details">
+									<div class= "column">
+										<div class="tile is-parent">
+											<article class="body-information" class="tile is-child">
+												<div class="shop-item">
+													<figure class="image">
+															<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/cafe.jpeg">
+													</figure>
+													<h2 class="shop-item-title"><strong class="subtitle">Cafe ( 16x16 )</strong></h2>
+													<div class="shop-item-details">
+													</div>
+												</div>
+											</article>
 										</div>
 									</div>
-								</article>
-							</div>
-						</div>
-						<div class= "column">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_venado.JPG">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">El Venado ( 16x20  )</strong></h2>
-										<div class="shop-item-details">
+								</div>
+								<div class="tile is-parent">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_catrin_trabajando.JPG">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">El Catrin Trabajando ( 24x30 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="columns">
-						<div class= "column is-one-third">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_1.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2>
-										<div class="shop-item-details">
+						<div class= "columns">
+							<div class= "column is-two-thirds">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">	
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/under_the_moonlight.jpeg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">Under The Moonlight ( 24X36 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
 							</div>
-						</div>
-						<div class= "column is-one-third">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_2.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2>
-										<div class="shop-item-details">
+							<div class= "column">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/el_venado.JPG">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">El Venado ( 16x20  )</strong></h2>
+											<div class="shop-item-details">
+											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
 							</div>
 						</div>
-						<div class="column">
-							<div class="tile is-parent is-vertical">
-								<article class="body-information" class="tile is-child">
-									<div class="shop-item">
-										<figure class="image">
-												<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_3.jpeg">
-										</figure>
-										<h2 class="shop-item-title"><strong class="subtitle">Lotus 3 ( 20x30 )</strong></h2>
-										<div class="shop-item-details">
+						<div class="columns">
+							<div class= "column is-one-third">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_1.jpeg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">lotus 1 (20x30 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
+							</div>
+							<div class= "column is-one-third">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_2.jpeg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">Lotus 2 ( 20x30 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
+										</div>
+									</article>
+								</div>
+							</div>
+							<div class="column">
+								<div class="tile is-parent is-vertical">
+									<article class="body-information" class="tile is-child">
+										<div class="shop-item">
+											<figure class="image">
+													<img onclick = "zoomImage(event)" id="myImg" class="shop-item-image" src="https://tawataka.github.io/Resume/img/lotus_3.jpeg">
+											</figure>
+											<h2 class="shop-item-title"><strong class="subtitle">Lotus 3 ( 20x30 )</strong></h2>
+											<div class="shop-item-details">
+											</div>
+										</div>
+									</article>
+								</div>
 							</div>
 						</div>
-					</div>
-		</div>
-	</section>
-	<section class="section" id="body-contact-information">
-			<div class="container is-fluid">
-					<div class="level is-parent">
-							<div class="level-left is-child">
-								<h4 class="title"> 
-									<a><i id="darkmode-button" class="fa fa-sun-o default" onclick = "toggleNightMode(event)"></i></a>
-								</h4>
-							</div>
-							<div class="level-right is-child">
-								<h4 class="subtitle"> 
-									<p>Don't be a stranger</p>
-									<p><strong class="subtitle">LETS WORK TOGETHER:</strong></p>
-									<p id="contact-information">tawareyna@gmail.com</p>
-									<p id="contact-information">831-524-6984</p>
-								</h4>
-							</div>
-					</div>
 			</div>
-	</section>
-</body>
+		</section>
+		<section class="section" id="body-contact-information">
+				<div class="container is-fluid">
+						<div class="level is-parent">
+								<div class="level-left is-child">
+									<h4 class="title"> 
+										<a><i id="darkmode-button" class="fa fa-sun-o default" onclick = "toggleNightMode(event)"></i></a>
+									</h4>
+								</div>
+								<div class="level-right is-child">
+									<h4 class="subtitle"> 
+										<p>Don't be a stranger</p>
+										<p><strong class="subtitle">LETS WORK TOGETHER:</strong></p>
+										<p id="contact-information">tawareyna@gmail.com</p>
+										<p id="contact-information">831-524-6984</p>
+									</h4>
+								</div>
+						</div>
+				</div>
+		</section>
+	</body>
+</html>
